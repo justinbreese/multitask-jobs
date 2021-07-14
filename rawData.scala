@@ -5,7 +5,7 @@
 
 import org.apache.spark.sql.functions._
 
-val df = spark.range(1000).withColumn("animal", lit("dog"))
+val df = spark.range(1000).withColumn("animal", lit(animal))
 
 // COMMAND ----------
 

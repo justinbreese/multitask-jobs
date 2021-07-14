@@ -8,7 +8,7 @@ display(silverDf)
 
 // COMMAND ----------
 
-val goldDf = silverDf.withColumn("food", lit("broccoli"))
+val goldDf = silverDf.withColumn("food", lit(food))
 display(goldDf)
 
 // COMMAND ----------
