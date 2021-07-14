@@ -18,6 +18,7 @@ bronzePath = savePath + "/bronze"
 enrichedPath = savePath + "/enriched"
 silverPath = savePath + "/silver"
 goldPath = savePath + "/gold"
+selCols = ["left.id", "animal", "colB", "colC"]
 
 # COMMAND ----------
 
@@ -26,7 +27,7 @@ bronzeDf = spark.read.format("delta").load(bronzePath)
 
 # COMMAND ----------
 
-joinedDf = rawDf.join(bronzeDf, rawDf.id == bronzeDf.id, "right_outer")
+joinedDf = rawDf.alias("left").join(bronzeDf.alias("right"), rawDf.id == bronzeDf.id, "right_outer").select(*selCols)
 
 # COMMAND ----------
 

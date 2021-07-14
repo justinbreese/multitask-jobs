@@ -19,6 +19,7 @@ enrichedPath = savePath + "/enriched"
 silverPath = savePath + "/silver"
 goldPath = savePath + "/gold"
 
+enrichedDf = spark.read.format("delta").load(enrichedPath)
 df = spark.range(100).withColumn("colE", col("id") % 2)
 selCols = ["left.id", "animal", "colB", "colC", "colE"]
 joinedDf = enrichedDf.alias("left").join(df.alias("right"), enrichedDf.id == df.id, "left_outer").select(*selCols)

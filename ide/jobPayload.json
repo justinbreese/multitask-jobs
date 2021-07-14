@@ -1,0 +1,134 @@
+{
+    "email_notifications": {},
+    "name": "intuitMultitaskIDEfromCli",
+    "max_concurrent_runs": 1,
+    "tasks": [
+        {
+            "new_cluster": {
+                "spark_version": "8.3.x-scala2.12",
+                "aws_attributes": {
+                    "availability": "SPOT_WITH_FALLBACK",
+                    "instance_profile_arn": "arn:aws:iam::997819012307:instance-profile/shard-demo-s3-access",
+                    "first_on_demand": 1,
+                    "zone_id": "us-west-2a"
+                },
+                "node_type_id": "i3.xlarge",
+                "spark_env_vars": {
+                    "PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+                },
+                "num_workers": 1
+            },
+            "spark_python_task": {
+                "python_file": "dbfs:/user/justin.breese@databricks.com/projects/multiTaskIde/bronzeData.py",
+                "parameters": [
+                    "--savePath",
+                    "/mnt/jbreese/temp/multiTaskJobsIde",
+                    "--animal",
+                    "cat",
+                    "--food",
+                    "pie"
+                ]
+            },
+            "email_notifications": {},
+            "task_key": "bronze"
+        },
+        {
+            "new_cluster": {
+                "spark_version": "8.3.x-scala2.12",
+                "aws_attributes": {
+                    "availability": "SPOT_WITH_FALLBACK",
+                    "instance_profile_arn": "arn:aws:iam::997819012307:instance-profile/shard-demo-s3-access",
+                    "first_on_demand": 1
+                },
+                "node_type_id": "i3.xlarge",
+                "spark_env_vars": {
+                    "PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+                },
+                "num_workers": 1
+            },
+            "spark_python_task": {
+                "python_file": "dbfs:/user/justin.breese@databricks.com/projects/multiTaskIde/enrichedData.py"
+            },
+            "email_notifications": {},
+            "task_key": "enriched",
+            "depends_on": [
+                {
+                    "task_key": "bronze"
+                },
+                {
+                    "task_key": "raw"
+                }
+            ]
+        },
+        {
+            "new_cluster": {
+                "spark_version": "8.3.x-scala2.12",
+                "aws_attributes": {
+                    "availability": "SPOT_WITH_FALLBACK",
+                    "instance_profile_arn": "arn:aws:iam::997819012307:instance-profile/shard-demo-s3-access",
+                    "first_on_demand": 1
+                },
+                "node_type_id": "i3.xlarge",
+                "spark_env_vars": {
+                    "PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+                },
+                "num_workers": 1
+            },
+            "spark_python_task": {
+                "python_file": "dbfs:/user/justin.breese@databricks.com/projects/multiTaskIde/goldData.py"
+            },
+            "email_notifications": {},
+            "task_key": "gold",
+            "depends_on": [
+                {
+                    "task_key": "silver"
+                }
+            ]
+        },
+        {
+            "new_cluster": {
+                "spark_version": "8.3.x-scala2.12",
+                "aws_attributes": {
+                    "availability": "SPOT_WITH_FALLBACK",
+                    "instance_profile_arn": "arn:aws:iam::997819012307:instance-profile/shard-demo-s3-access",
+                    "first_on_demand": 1
+                },
+                "node_type_id": "i3.xlarge",
+                "spark_env_vars": {
+                    "PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+                },
+                "num_workers": 1
+            },
+            "spark_python_task": {
+                "python_file": "dbfs:/user/justin.breese@databricks.com/projects/multiTaskIde/rawData.py"
+            },
+            "email_notifications": {},
+            "task_key": "raw"
+        },
+        {
+            "new_cluster": {
+                "spark_version": "8.3.x-scala2.12",
+                "aws_attributes": {
+                    "availability": "SPOT_WITH_FALLBACK",
+                    "instance_profile_arn": "arn:aws:iam::997819012307:instance-profile/shard-demo-s3-access",
+                    "first_on_demand": 1
+                },
+                "node_type_id": "i3.xlarge",
+                "spark_env_vars": {
+                    "PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+                },
+                "num_workers": 1
+            },
+            "spark_python_task": {
+                "python_file": "dbfs:/user/justin.breese@databricks.com/projects/multiTaskIde/silverdata.py"
+            },
+            "email_notifications": {},
+            "task_key": "silver",
+            "depends_on": [
+                {
+                    "task_key": "enriched"
+                }
+            ]
+        }
+    ]
+}
