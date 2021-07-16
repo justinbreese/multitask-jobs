@@ -73,3 +73,5 @@ def jbreese_gold_data():
 # idExpectation = {"id_not_null", "id is not null"}
 # @dlt.expect(idExpectation)
 
+# we can do tables or views for data sources
+# readStream as well as read

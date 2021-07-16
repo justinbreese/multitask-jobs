@@ -2,7 +2,7 @@
 This notebook shows you a few different ways to from code to production:
 * Notebook to multi-task jobs
 * IDE to multi-task jobs
-* Notebook to a Delta Live Table (DLT)
+* Notebook to a Delta Live Tables (DLT)
 
 # A bit about each of these ways
 ## Notebook to multi-task jobs
@@ -14,8 +14,8 @@ This notebook shows you a few different ways to from code to production:
 * Choose your method to deliver the code here:
     * Upload to DBFS/S3
     * Commit to git/Repos
-    * Create your json payload
-    * Use the databricks CLI to create the jobs
+* Create your json payload
+* Use the databricks CLI to create the jobs
 
 ## Notebook to DLT
 * Write the code
